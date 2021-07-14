@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function mostraInfo(strUF) {
+            console.log(strUF);
+            if (strUF.length > 0) {
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    console.log("ReadyState: " + this.readyState);
+                    if (this.readyState == 4 && this.status == 200) {
+                        let obj = JSON.parse(this.responseText);
+                        document.getElementById("resposta").value = this.responseText;
+                        console.log("Resposta: " + this.responseText);
+                        let cities = document.getElementById("cidades");
+                        // let city = new Option(this.responseText, this.responseText);
+                        // cities.options.add(city);
+                        for (i=0;i<obj.length;i++) {
+                            //console.log("cidade: " + obj[i]);
+                            let city = new Option(obj[i], obj[i]);
+                            cities.options.add(city);
+                        }
+                    }
+                }
+                xmlHttp.open("GET", "https://localhost/3dawNoite/ex20_GetCidades.php?estado=" + strUF, true);
+                xmlHttp.send();
+                console.log("requisição enviada");
+            }
+        }
+    </script>
+</head>
+<body>
+<form action="">
+    Diga seu Estado:
+    <input type="text" id="uf" name="uf" onchange="mostraInfo(this.value)">
+    <br><br>Resposta:
+    <input type="text" id="resposta" name="resposta">
+    <br><br>
+    Cidades:
+    <select id="cidades">
+
+    </select>
+    <br><br>
+    <input type="submit" value="Enviar">
+</form>
+
+</body>
+</html>
