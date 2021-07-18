@@ -2,7 +2,7 @@
 //dados de conexao com banco de dados do sistema
 $host   = "localhost";
 $user   = "root";
-$pass   = "root";
+$pass   = "";
 $db     = "produtos";
 
 //captura acao que deve ser executada
@@ -226,17 +226,9 @@ function validarForm( $id, $nome, $codigo, $categoria, $preco, $estoque, $peso, 
     if ( $nome == null || trim( $nome ) == "" ) {
         return "Campo Nome deve ser preenchido.";
     }
-    //validar campo email
-    if ( $email == null || trim( $email ) == "" ) {
-        return "Campo Email deve ser preenchido.";
-    }
-    //validar campo telefone
-    if ( $telefone == null || trim( $telefone ) == "" ) {
-        return "Campo Telefone deve ser preenchido.";
-    }
-    //validar campo foto
-    if ( empty( $foto ) ) {
-        //return "Campo Foto deve ser preenchido.";
+    //validar campo codigo
+    if ( $codigo == null || trim( $codigo ) == "" ) {
+        return "Campo codigo deve ser preenchido.";
     }
 
     return null;
